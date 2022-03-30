@@ -1,4 +1,4 @@
-@charset "UTF-8";h1,h2,h3,h4,h5,h6{line-height:1.5em!important;color:#f8e9eb}body{background-color:rgba(0,0,0,.884)!important}.main-heading{text-transform:uppercase;text-shadow:3px 3px 3px #000}.card{color:#f8e9eb;outline:unset;border:none!important;background-color:unset!important}.card .card-header{font-weight:700;border:none!important}.ng-touched.ng-invalid{border-color:red;border-width:3px;transition:border .2s ease-in}
+@charset "UTF-8";h1,h2,h3,h4,h5,h6{line-height:1.5em!important;color:#f8e9eb}body{background-color:rgba(0,0,0,.884)!important}.main-heading{text-transform:capitalize;text-shadow:3px 3px 3px #000}.card{color:#f8e9eb;outline:unset;border:none!important;background-color:unset!important}.card .card-header{font-weight:700;border:none!important}.ng-touched.ng-invalid{border-color:red;border-width:3px;transition:border .2s ease-in}
 /*!
  * Bootstrap v5.1.3 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
