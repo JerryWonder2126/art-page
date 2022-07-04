@@ -24,6 +24,7 @@ import { SectionModalComponent } from './admin/modals/section/section-modal.comp
 import { OfferModalComponent } from './admin/modals/offer/offer-modal.component';
 import { NetworkInterceptor } from './interceptor/network.interceptor';
 import { ImageListComponent } from './admin/image-list/image-list.component';
+import { AuthComponent } from './admin/auth/auth.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { ImageListComponent } from './admin/image-list/image-list.component';
     ManageSectionsComponent,
     SectionModalComponent,
     OfferModalComponent,
-    ImageListComponent
+    ImageListComponent,
+    AuthComponent
   ],
   imports: [
     BrowserModule,

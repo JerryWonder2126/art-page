@@ -58,9 +58,9 @@ export class OffersService {
     return this.backendService.getLatestOffers();
   }
 
-  addOffer(form: FormData, section_hash: string): Observable<any> {
-    return this.backendService.addOffer(form, section_hash).pipe(map(response => {
-      const newOffer = response.rows as OfferInterface;
+  addOffer(form: FormData, section_hash: string): any {
+    return this.backendService.addOffer(form, section_hash)?.pipe(map(response => {
+      const newOffer = response?.rows as OfferInterface;
       const updatedOffers = [
         ...this._offers.getValue(),
         newOffer
@@ -83,7 +83,7 @@ export class OffersService {
   }
 
   deleteOffer(uhash: string, section_hash: string) {
-    return this.backendService.deleteOffer(uhash, section_hash).pipe(map(response => {
+    return this.backendService.deleteOffer(uhash, section_hash)?.pipe(map(response => {
       return 'deleted succesfully';
     }));
   }
@@ -100,7 +100,7 @@ export class OffersService {
   }
 
   deleteSection(uhash: string) {
-    return this.backendService.deleteSection(uhash).pipe(map(response => {
+    return this.backendService.deleteSection(uhash)?.pipe(map(response => {
       return 'deleted succesfully';
     }));
   }

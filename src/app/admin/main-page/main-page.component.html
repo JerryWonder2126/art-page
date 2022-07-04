@@ -3,15 +3,41 @@
     <header>
         <h1><a class="navbar-brand" [routerLink]="['/home']">SinaArtz</a></h1>
     </header>
+    <div>
+        <button (click)="handleLoginState()" class="btn btn-primary">{{ loggedIn ? 'logout' : 'login' }}</button>
+    </div>
     <div *ngIf="!offersVisibility" class="row" [ngClass]="{'fade': offersVisibility}">
         <art-section-modal (deleteButtonClicked)="deleteSection(activeService.uhash)" [service]="activeService"></art-section-modal>
         <div class="col-12 head-section">
             <h2>Sections</h2>
             <button (click)="toggleSectionAddFormVisiblity()">{{!sectionsAddFormVisible ? '+' : '-' }}</button>
         </div>
+        <div *ngIf="!sectionsAddFormVisible" class="col-12">
+            <div *ngFor="let service of services | async" class="card">
+                <div class="card-body">
+                    <div class="thumbnail-div">
+                        <img [src]="service.imgurl" class="thumbnail">
+                    </div>
+                    <div>
+                        <p>
+                            {{ service.title }}
+                        </p>
+                        <div class="action-btns">
+                            <button type="button" class="btn btn-danger action-btn" (click)="setActiveService(service)" 
+                            data-bs-toggle="modal" data-bs-target="#sectionDeleteModal">delete</button>
+                            <button type="button" class="btn btn-secondary action-btn" (click)="setActiveService(service)" 
+                            data-bs-toggle="modal" data-bs-target="#sectionEditModal">edit</button>
+                            <button (click)="toggleOffersVisibility(service)" class="btn btn-warning action-btn">offers</button>
+                            <button type="button" class="btn btn-primary action-btn" (click)="setActiveService(service)" 
+                            data-bs-toggle="modal" data-bs-target="#sectionPreviewModal">preview</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col">
             <art-manage-sections *ngIf="sectionsAddFormVisible" (formActionComplete)="toggleSectionAddFormVisiblity()"></art-manage-sections>
-            <table *ngIf="!sectionsAddFormVisible" class="table table-dark table-hover table-strped">
+            <!-- <table *ngIf="!sectionsAddFormVisible" class="table table-dark table-hover table-strped">
                 <thead>
                     <tr class="text-uppercase">
                         <th></th>
@@ -36,7 +62,7 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
         </div>
     </div>
     <div *ngIf="offersVisibility && !editOfferVisible && !previewOfferVisible" class="row mt-3 justify-content-center" [ngClass]="{'fade': !offersVisibility}">
@@ -48,9 +74,30 @@
             <h2> {{ activeService.title }}'s Offers</h2>
             <button (click)="toggleOffersAddFormVisibility()">{{!offersAddFormVisible ? '+' : '-' }}</button>
         </div>
+        <div *ngIf="!offersAddFormVisible" class="col-12">
+            <div *ngFor="let offer of offers | async" class="card">
+                <div class="card-body">
+                    <div class="thumbnail-div">
+                        <img [src]="offer.imgurl[0]" class="thumbnail">
+                    </div>
+                    <div>
+                        <p>
+                            {{ offer.title }}
+                        </p>
+                        <div class="action-btns">
+                            <button type="button" class="btn btn-danger action-btn" (click)="setActiveOffer(offer)" 
+                            data-bs-toggle="modal" data-bs-target="#offerDeleteModal">delete</button>
+                            <button type="button" class="btn btn-secondary  action-btn" (click)="editOffer(offer)">edit</button>
+                            <!-- <button (click)="toggleOffersVisibility(offer.uhash)" class="btn btn-warning">offers</button> -->
+                            <button type="button" class="btn btn-primary  action-btn" (click)="previewOffer(offer)">preview</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="col">
             <art-manage-offers [section_hash]="activeService.uhash" (formActionComplete)="toggleOffersAddFormVisibility()" *ngIf="offersAddFormVisible"></art-manage-offers>
-            <table *ngIf="!offersAddFormVisible" class="table table-dark table-hover">
+            <!-- <table *ngIf="!offersAddFormVisible" class="table table-dark table-hover">
                 <thead>
                     <tr class="text-uppercase">
                         <th></th>
@@ -59,7 +106,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr  *ngFor="let offer of offers | async">
+                    <tr *ngFor="let offer of offers | async">
                         <td  class="align-middle">
                             <img [src]="offer.imgurl[0]" class="thumbnail">
                         </td>
@@ -68,12 +115,12 @@
                             <button type="button" class="btn btn-danger" (click)="setActiveOffer(offer)" 
                             data-bs-toggle="modal" data-bs-target="#offerDeleteModal">delete</button>
                             <button type="button" class="btn btn-secondary" (click)="editOffer(offer)">edit</button>
-                            <!-- <button (click)="toggleOffersVisibility(offer.uhash)" class="btn btn-warning">offers</button> -->
+                            <!- <button (click)="toggleOffersVisibility(offer.uhash)" class="btn btn-warning">offers</button> --
                             <button type="button" class="btn btn-primary" (click)="previewOffer(offer)">preview</button>
                         </td>
                     </tr>
                 </tbody>
-            </table>
+            </table> -->
         </div>
     </div>
     <div *ngIf="offersVisibility" class="row mt-3 justify-content-center" [ngClass]="{'fade': !offersVisibility}">

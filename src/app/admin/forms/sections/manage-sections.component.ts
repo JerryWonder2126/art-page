@@ -3,7 +3,9 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { IUpdateObject, SectionItemInterface } from 'src/app/extra-packs/interfaces/general-interfaces';
-import { AdminService } from 'src/app/services/admin/admin.service';
+import { BackendService } from 'src/app/services/backend/backend.service';
+// import { AdminService } from 'src/app/services/admin/admin.service';
+import { OffersService } from 'src/app/services/offers.service';
 import {validate as uuidValidate} from 'uuid';
 
 @Component({
@@ -21,7 +23,7 @@ export class ManageSectionsComponent implements OnInit {
   btnText!: string;
   imageName = '';
 
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: BackendService) {}
 
   ngOnInit(): void {
     this.btnText = this.update ? 'update' : 'add';
@@ -36,7 +38,6 @@ export class ManageSectionsComponent implements OnInit {
   }
   
   processAddForm(form: NgForm) {
-    const sectionsURL = 'http://localhost:3000/resources/sections/';
     if (form.valid) {
       if (!this.update) {
         this.addSection(form);
@@ -49,7 +50,7 @@ export class ManageSectionsComponent implements OnInit {
   addSection(form: NgForm) {
     this.fd.set('title', form.value['title']);
     const upload$ = this.adminService.addSection(this.fd);
-    upload$.subscribe(response => {
+    upload$?.subscribe(response => {
       form.reset();
       this.fd.forEach((value, key) => {
         this.fd.delete(key);
@@ -65,7 +66,7 @@ export class ManageSectionsComponent implements OnInit {
         updateObj.value = form.form.controls[key].value;
       }
     });
-    this.adminService.updateSectionTitle(updateObj).subscribe(resp => {
+    this.adminService.updateSectionTitle(updateObj)?.subscribe(resp => {
       this.formActionComplete.emit();
     });
   }
@@ -79,7 +80,7 @@ export class ManageSectionsComponent implements OnInit {
     this.fd.set('uhash', this.service.uhash);
     this.fd.set('value', this.service.imgurl);
     this.fd.set('type', 'imgurl');
-    this.adminService.updateSectionImgURL(this.fd).subscribe(resp => {
+    this.adminService.updateSectionImgURL(this.fd)?.subscribe(resp => {
       form.reset();
       this.fd.forEach((value, key) => {
         this.fd.delete(key);

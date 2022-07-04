@@ -43,7 +43,8 @@ export interface OfferInterface {
     year?: number,
     dimension?: string,
     orientation?: string,
-    medium?: string
+    medium?: string,
+    status?: string
 }
 
 export interface IOBody {
@@ -67,4 +68,4 @@ export interface IState {
     offersVisibility: boolean,
     activeOffer: OfferInterface,
     activeService: SectionItemInterface
-  }
+}

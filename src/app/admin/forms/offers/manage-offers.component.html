@@ -1,54 +1,61 @@
 <h5 *ngIf="update">Update Offer</h5>
-<form #offersForm="ngForm" class="text-light" (ngSubmit)="processForm(offersForm)">
-    <div class="mb-2">
+<form #offersForm="ngForm" class="text-light row" (ngSubmit)="processForm(offersForm)">
+    <div class="mb-2 col-12">
         <label for="section_hash">Section</label>
-        <select name="section_hash" id="section_hash" class="form-control" required [(ngModel)]="offer.section_hash" [attr.disabled]="update">
+        <select name="section_hash" id="section_hash" class="form-select" required [(ngModel)]="offer.section_hash" [attr.disabled]="update">
             <!-- <option value="">-- select --</option> -->
             <option [value]="serv.uhash" *ngFor="let serv of services | async">{{ serv.title }}</option>
         </select>
     </div>
-    <div class="mb-2">
+    <div class="mb-2 col-12">
         <label for="title">title</label>
         <input type="text" name="title" id="title" class="form-control" [(ngModel)]="offer.title" required>
     </div>
-    <div class="mb-2">
+    <div class="mb-2 col-12">
         <label for="short_description">short description</label>
         <input type="text" maxlength="80" name="short_description" id="short_description" class="form-control" [(ngModel)]="offer.short_description">
     </div>
-    <div class="mb-2">
+    <div class="mb-2 col-12">
         <label for="long_description">long description</label>
         <textarea maxlength="1000" name="long_description" id="long_description" class="form-control" [(ngModel)]="offer.long_description"></textarea>
     </div>
-    <div class="mb-2">
+    <div class="mb-2 col-6 col-md-8">
+        <label for="section_hash">Status</label>
+        <select name="status" id="status" class="form-select" required [(ngModel)]="offer.status">
+            <!-- <option value="">-- select --</option> -->
+            <option selected value="on sale">on sale</option>
+            <option value="sold">sold</option>
+        </select>
+    </div>
+    <div class="mb-2 col-6 col-md-4">
         <label for="price">price</label>
         <input type="number" name="price" id="price" step="0.01" class="form-control" [(ngModel)]="offer.price" ngModel>
-        <div id="priceHelp" class="form-text text-warning">Please note that maximum decimal place is 2</div>
     </div>
-    <div class="mb-2">
+    <div class="mb-2 col-6 col-md-8">
         <label for="artist">Artist</label>
         <input type="text" name="artist" id="artist" class="form-control" [(ngModel)]="offer.artist">
     </div>
-    <div class="mb-2">
+    <div class="mb-2 col-6 col-md-4">
         <label for="medium">Medium</label>
         <input type="text" name="medium" id="medium" class="form-control" [(ngModel)]="offer.medium">
     </div>
-    <div class="mb-2">
-        <label for="dimension">Dimension in inches</label>
+    <div class="mb-2 col-12 col-md-4">
+        <label for="dimension">Dimension (inches)</label>
         <input type="text" name="dimension" id="dimension" class="form-control" [(ngModel)]="offer.dimension">
     </div>
-    <div class="mb-2">
+    <div class="mb-2 col-6 col-md-4">
         <label for="orientation">Orientation</label>
         <input type="text" name="orientation" id="orientation" class="form-control" [(ngModel)]="offer.orientation">
     </div>
-    <div class="mb-2">
+    <div class="mb-2 col-6 col-md-4">
         <label for="year">Year</label>
         <input type="number" name="year" id="year" class="form-control" [(ngModel)]="offer.year">
     </div>
-    <div *ngIf="!update" class="mb-2">
+    <div *ngIf="!update" class="mb-2 col-12">
         <label for="images">images</label>
         <input ngModel #imageField (change)="processImage(imageField)" type="file" accept="image/*" name="images" id="images" class="form-control" required multiple>
     </div>
-    <div class="mb-2">
+    <div class="mb-2 col-12">
         <input type="submit" [value]="btnText" id="submit" class="form-control btn btn-md" [ngClass]="{'btn-light': update, 'btn-dark': !update, 'disabled': !offersForm.valid}">
     </div>
 </form>
